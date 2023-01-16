@@ -65,21 +65,6 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
-      #loader {
-        border: 12px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 12px solid #444444;
-        width: 70px;
-        height: 70px;
-        animation: spin 1s linear infinite;
-        visibility: hidden;
-      }
-
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
 
       .center {
         position: absolute;
@@ -108,14 +93,14 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="mb-auto">
     <div>
-
+      <img src="{{ url_for('static', filename='logonobg.png') }}">
+      <p class="lead">C++ to Latex Psudo-Code generator</p>
     </div>
   </header>
 
   <div id="loader" class="center"></div>
   <main class="px-3">
-    <img src="{{ url_for('static', filename='logonobg.png') }}">
-    <p class="lead">C++ to Latex Psudo-Code generator</p>
+   
     <p class="lead">
       <form action="/display" method="POST" enctype="multipart/form-data" >
         <label>Enter your Code here</label>
@@ -124,7 +109,8 @@
       <input type="submit" class="btn btn-lg btn-secondary fw-bold border-white bg-white" onclick="loading();" />
         
     </form>
-
+    <h1>Latex Code</h1>
+    {{output}}
     </p>
   
   </main>

@@ -57,7 +57,7 @@ def save_file():
         """     
         out = latex_code
 
-    return render_template('contenthome.html', output=out)
+    return render_template('index.html', output=out)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug = True)
