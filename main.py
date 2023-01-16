@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import subprocess
 import shlex
-
+import re
 
 
 app = Flask(__name__)
@@ -21,9 +21,41 @@ def upload_file():
 @app.route('/display', methods = ['GET', 'POST'])
 def save_file():
     if request.method == 'POST':
-        input=request.form['code']
+        input_func=request.form['code']
 
-        out = input + "Done"
+        latex_code = """
+        \\usepackage{algorithm}
+        \\usepackage{algpseudocode}
+        \\begin{algorithm}
+        """
+        def extract_func_info(input_func):
+            func_name = re.search("(\w+)\s*\(", input_func).group(1)
+            parameters = re.search("\((.*)\)", input_func).group(1)
+            # parameter_list = parameters.split(",")
+            # parameter_list = [x.strip() for x in parameter_list]
+            return func_name, parameters
+
+        func_name, parameter_list = extract_func_info(input_func)
+        # print(func_name)  # Output: "add"
+        # print(parameter_list)  # Output: ["int a", "int b"]
+
+        def camel_to_sentence(camel_case_word):
+            camel_case_word=camel_case_word[0].upper()+camel_case_word[1:]
+            parts = re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', camel_case_word)
+            parts = [part.capitalize() for part in parts]
+            return ' '.join(parts)
+
+        latex_caption = camel_to_sentence(func_name)
+
+        latex_code += f"\\caption{{{latex_caption}}}\n"
+
+        latex_code += "\\begin{algorithmic}\n"
+        latex_code += f"\\Procedure{{{func_name}}}{{{parameter_list}}}\n"
+        latex_code += """\\EndProcedure
+        \\end{algorithmic}
+        \\end{algorithm}
+        """     
+        out = latex_code
 
     return render_template('contenthome.html', output=out)
 
