@@ -1,18 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.104.2">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.104.2" />
     <title>Dynamic Instructions Calculation</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.2/examples/cover/"
+    />
 
-    
-
-    
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
 
     <style>
       .bd-placeholder-img {
@@ -31,10 +37,11 @@
 
       .b-example-divider {
         height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
         border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
       }
 
       .b-example-vr {
@@ -44,7 +51,7 @@
       }
 
       .bi {
-        vertical-align: -.125em;
+        vertical-align: -0.125em;
         fill: currentColor;
       }
 
@@ -74,53 +81,74 @@
         right: 0;
         margin: auto;
       }
+      .container {
+        display: flex;
+        flex-wrap: nowrap;
+        height: 100vh; /* 100% of the viewport height */
+      }
+      /* Define the left and right columns */
+      .left-column {
+        width: 50%; /* Take up 50% of the space */
+        padding: 20px; /* Add some padding */
+      }
+      .right-column {
+        width: 50%; /* Take up 50% of the space */
+        padding: 20px; /* Add some padding */
+      }
     </style>
-    <script>
-        function loading() {
-                document.querySelector(
-                  "body").style.visibility = "hidden";
-                document.querySelector(
-                  "#loader").style.visibility = "visible";
-        };
-    </script>
-    
+
     <!-- Custom styles for this template -->
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/cover.css') }}"
+    />
   </head>
-  <body class="d-flex h-100 text-center text-bg-dark">
-    
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <img src="{{ url_for('static', filename='logonobg.png') }}">
-      <p class="lead">C++ to Latex Psudo-Code generator</p>
+  <body class="d-flex h-100 text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='logonobg.png') }}" />
+          <p class="lead">C++ to Latex Psudo-Code generator</p>
+        </div>
+      </header>
+
+      <div id="loader"></div>
+      <div class="container">
+        <div class="left-column">
+          <form action="/display" method="POST" enctype="multipart/form-data">
+            <label>
+              <h1>C++ Code</h1>
+            </label>
+            <textarea name="code" rows="20" cols="20"></textarea>
+            <br /><br />
+            <input
+              type="submit"
+              class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+            />
+          </form>
+        </div>
+        <div class="right-column" id="output">
+          <label>
+            <h1>Latex Code</h1>
+          </label>
+          <textarea name="code" rows="20" cols="20">
+ {{output}}
+          </textarea>
+        </div>
+      </div>
+
+      <footer class="mt-auto text-white-50">
+        <p>
+          Made by
+          <a href="https://github.com/ayushr1" class="text-white"
+            >Ayush Rathore</a
+          >, and
+          <a href="https://github.com/shardy30" class="text-white"
+            >Shardendu Shekhar Chaubey</a
+          >.
+        </p>
+      </footer>
     </div>
-  </header>
-
-  <div id="loader" class="center"></div>
-  <main class="px-3">
-   
-    <p class="lead">
-      <form action="/display" method="POST" enctype="multipart/form-data" >
-        <label>Enter your Code here</label>
-        <input name="code" />
-      <br /><br />
-      <input type="submit" class="btn btn-lg btn-secondary fw-bold border-white bg-white" onclick="loading();" />
-        
-    </form>
-    <h1>Latex Code</h1>
-    {{output}}
-    </p>
-  
-  </main>
-
-  <footer class="mt-auto text-white-50">
-    <p>Made by <a href="https://github.com/ayushr1" class="text-white">Ayush Rathore</a>, and <a href="https://github.com/shardy30" class="text-white">Shardendu Shekhar Chaubey</a>.</p>
-  </footer>
-</div>
-
-
-    
   </body>
 </html>
