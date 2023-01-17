@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="h-100" class="bg-dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,72 +21,18 @@
     />
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+      .containera {
       }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+      @media (max-width: 800px) {
+        .left-column {
+          width: 100%;
+          padding: 2px;
+        }
+        .right-column {
+          width: 100%;
+          padding: 2px;
         }
       }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, 0.1);
-        border: solid rgba(0, 0, 0, 0.15);
-        border-width: 1px 0;
-        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
-          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -0.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .center {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-      }
-      .container {
-        display: flex;
-        flex-wrap: nowrap;
-        height: 100vh; /* 100% of the viewport height */
-      }
-      /* Define the left and right columns */
       .left-column {
         width: 50%; /* Take up 50% of the space */
         padding: 20px; /* Add some padding */
@@ -94,6 +40,9 @@
       .right-column {
         width: 50%; /* Take up 50% of the space */
         padding: 20px; /* Add some padding */
+      }
+      textarea {
+        max-width: 100%;
       }
     </style>
 
@@ -104,54 +53,57 @@
       href="{{ url_for('static', filename='css/cover.css') }}"
     />
   </head>
-  <body class="d-flex h-100 text-bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="mb-auto">
-        <div class="text-center">
-          <img src="{{ url_for('static', filename='logonobg.png') }}" />
-          <p class="lead">C++ to Latex Psudo-Code generator</p>
-        </div>
-      </header>
 
-      <div id="loader"></div>
-      <div class="container">
-        <div class="left-column">
-          <form action="/display" method="POST" enctype="multipart/form-data">
-            <label>
-              <h1>C++ Code</h1>
-            </label>
-            <textarea name="code" rows="20" cols="20"></textarea>
-            <br /><br />
-            <input
-              type="submit"
-              class="btn btn-lg btn-secondary fw-bold border-white bg-white"
-            />
-          </form>
-        </div>
-        <div class="right-column" id="output">
-          <label>
-            <h1>Latex Code</h1>
-          </label>
-          <textarea name="code" rows="20" cols="20">
- {{output}}
-          </textarea>
-        </div>
+  <body class="text-bg-dark">
+    <header class="mb-auto">
+      <div
+        class="text-center cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-auto text-white-50"
+      >
+        <img
+          class="img-fluid"
+          src="{{ url_for('static', filename='logonobg.png') }}"
+        />
+        <p>C++ to Latex Psudo-Code generator</p>
       </div>
-
-      <footer class="mt-auto text-white-50">
-        <p>
-          Made by
-          <a href="https://github.com/ayushr1" class="text-white"
-            >Ayush Rathore</a
-          >, and
-          <a href="https://github.com/shardy30" class="text-white"
-            >Shardendu Shekhar Chaubey</a
-          >.
-          <a href="https://github.com/Lokesh14120" class="text-white"
-            >Lokesh Yadav</a
-          >.
-        </p>
-      </footer>
+    </header>
+    <div class="containera d-flex w-100 h-100 mx-auto mt-auto text-white-50">
+      <div class="left-column">
+        <form action="/display" method="POST" enctype="multipart/form-data">
+          <label>
+            <h1>C++ Code</h1>
+          </label>
+          <textarea name="code" rows="20" cols="200"></textarea>
+          <br /><br />
+          <input
+            type="submit"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+          />
+        </form>
+      </div>
+      <div class="right-column" id="output">
+        <label>
+          <h1>Latex Code</h1>
+        </label>
+        <textarea name="code" rows="20" cols="200">
+            {{output}}
+             </textarea
+        >
+      </div>
     </div>
+    <footer
+      class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-auto text-white-50"
+    >
+      <p>
+        Made by
+        <a href="https://github.com/ayushr1" class="text-white">Ayush Rathore</a
+        >, and
+        <a href="https://github.com/shardy30" class="text-white"
+          >Shardendu Shekhar Chaubey</a
+        >.
+        <a href="https://github.com/Lokesh14120" class="text-white"
+          >Lokesh Yadav</a
+        >.
+      </p>
+    </footer>
   </body>
 </html>
