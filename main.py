@@ -141,6 +141,7 @@ def save_file():
 
 
         tokens = ["$\gets$" if token == "=" else token for token in tokens]
+        tokens = ["\%" if token == "%" else token for token in tokens]
         tokens = ["$\geq$" if token == ">=" else token for token in tokens]
         tokens = ["$\leq$" if token == "<=" else token for token in tokens]
         tokens = ["$\phi$" if token == "null" else token for token in tokens]
